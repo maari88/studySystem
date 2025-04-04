@@ -54,7 +54,6 @@ public static Sheets getSheetsService() throws IOException, GeneralSecurityExcep
     public static void main(String[] args) throws IOException, GeneralSecurityException {
         sheetsService = getSheetsService();
 
-        // Читаем данные из листа "Оцінки"
         String range = "Оцінки!A2:G";
 
         ValueRange response = sheetsService.spreadsheets().values()
@@ -80,7 +79,7 @@ public static Sheets getSheetsService() throws IOException, GeneralSecurityExcep
             try {
                 score = Integer.parseInt(row.get(5).toString());
             } catch (NumberFormatException e) {
-                System.out.println("Ошибка при парсинге оценки для строки: " + row);
+                System.out.println("Помилка парсингу: " + row);
                 continue;
             }
 
@@ -105,8 +104,8 @@ public static Sheets getSheetsService() throws IOException, GeneralSecurityExcep
         String statsRange = "Статистика!A2:C";
 
         try {
-            System.out.println("Попытка записи данных в диапазон: " + statsRange);
-            System.out.println("Данные для записи: " + statsData);
+            System.out.println("Сроба запису в діапазон: " + statsRange);
+            System.out.println("Дані для запису: " + statsData);
 
             ValueRange body = new ValueRange().setValues(statsData);
 
@@ -115,9 +114,9 @@ public static Sheets getSheetsService() throws IOException, GeneralSecurityExcep
                     .setValueInputOption("RAW")
                     .execute();
 
-            System.out.println("Статистика успешно обновлена!");
+            System.out.println("Статистику оновлено успішно!");
         } catch (Exception e) {
-            System.err.println("Ошибка при записи данных в таблицу:");
+            System.err.println("Помилка при записі даних:");
             e.printStackTrace();
         }
 
